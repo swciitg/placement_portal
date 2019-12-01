@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- jQuery CDN -->
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+     <!-- highcharts CDN -->
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>  
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+
+    {% load chartit %}
+    {{ chart_list|load_charts:"br_cht,pi_cht,day_cht"}}
+</head>
+<style>
+.elem{
+	font-size: 18px;
+	color: black;
+	font-family: sans-serif;
+	padding: 0 10% 0 10%;
+}
+.single-item{
+	background-color: aliceblue;
+	color: black;
+	margin: 2px;
+	padding: 1%;
+	transition: all 1s;
+}
+.single-item:hover{
+	background-color: blue;
+	transition: all 1s;
+}
+</style>
+
+
+
+{% if user.is_authenticated %}
+<button><a href="{% url 'auths:logout' %}">Logout</a></button>
+{% endif %}
+
+<hr>
+
+
+<body>
+	<div id='br_cht'>
+	</div>
+    <hr>
+    <div id='pi_cht'>
+    </div>
+    <hr>
+    <div id ='day_cht'>
+    </div>
+<div>
+<a href="{% url 'home:students' %}" style="float: right;">Show All</a>
+<div>
+{% for student in studentsToShow %}
+<div class='single-item'> 
+	<span class='elem'>{{ student.name }}</span>
+	<span class='elem'>{{ student.branch }}</span>
+	<span class='elem'>{{ student.company }}</span>
+	<span class='elem'>{{ student.slot }}</span>
+</div>
+{% endfor %}
+</div>
+</div>
+</body>
+</html>

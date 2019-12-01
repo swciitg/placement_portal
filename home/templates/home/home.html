@@ -1,0 +1,7 @@
+
+
+{% if user.is_authenticated %}
+<button><a href="{% url 'auths:logout' %}">Logout</a></button>
+{% else %}
+<button><a href="{% url 'auths:login' %}">Login</a></button>
+{% endif %}
